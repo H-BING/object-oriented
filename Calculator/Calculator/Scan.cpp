@@ -1,50 +1,74 @@
-#include <iostream>
+
+/********************************************************************************
+FileName    :           Scan.cpp
+
+Author      :           HBING
+Version     :           1.1
+Date        :           2016/04/10
+
+Description:
+         定义Scan类中的类方发
+
+Function List:
+         void ToStringQueue        拆分四则运算表达式
+
+History:
+
+<author>    <time>     <version>            <desc>
+ HBING    2016/02/21      1.0          拆分四则运算表达式
+ HBING    2016/04/10      1.1          实现-号前补0以保证算式合法性
+                                       补充对符号的判断：即 + - * / ( ) 才可入队列
+
+********************************************************************************/
+
 #include <string>
 #include <queue>
 #include "Scan.h"
 using namespace std;
 
-void Scan::ToStringQueue(string input) {
+void Scan::ToStringQueue(string input) 
+{
 
-	/***
-	 *cout << "Scan::ToStringQueue(string input)" << endl;
-	 *以上代码用于检验成员函数是否被调用
-	 ***/
-
-
-	 /*定义m_strInput数组，并将input[i]转换成string类型*/
-	string *m_strInput = new string[10000];
-	if (m_strInput == NULL) {
-		cout << "内存申请失败！" << endl;
-	}
-	for (int i = 0; i <= input.size(); i++) {
-		m_strInput[i] = input[i];
-	}
-
-
-	/*提取数字与符号*/
-	for (int i = 0; i <= input.size(); i++) {
-		/***判断input[i]是否与input[i+1]共同构成一个实数***/
-		/***
-		 *若input[i]与input[i+1]共同构成一个实数
-		 *将m_strInput[i]与m_strInput[i+1]合并成一个字符串并赋到m_strInput[i+1]上
-		 *
-		 *反之，则将m_strInput[i]存入队列
-		 ***/
-		if (input[i] <= '9'&&input[i] >= '0' || input[i] == '.') {
-			if ((input[i + 1] <= '9'&&input[i + 1] >= '0') || input[i + 1] == '.') {
-				m_strInput[i] += m_strInput[i + 1];
-				m_strInput[i + 1] = m_strInput[i];
-			}
-			else {
-				q.push(m_strInput[i]);
-			}
+	string m_strInput;
+	
+	for (int i = 0; i <= input.size(); i++) 
+	{
+		
+		if (m_strInput.empty()) 
+		{
+			m_strInput = input[i];
 		}
-		else {
-			q.push(m_strInput[i]);
+
+		//数字
+		if (input[i] <= '9'&&input[i] >= '0' || input[i] == '.') 
+		{
+
+			//两位及以上数字
+			if ((input[i + 1] <= '9'&&input[i + 1] >= '0') || input[i + 1] == '.') 
+			{
+				m_strInput += input[i + 1];
+			}
+
+			//一位数字
+			else 
+			{
+				q.push(m_strInput);
+				m_strInput.clear();
+			}
+
+		}
+		//符号
+		else if (input[i] == '+' || input[i] == '-' || input[i] == '*' || input[i] == '/' || input[i] == '(' || input[i] == ')')
+		{
+			if ((q.empty() || q.back() == "(") && input[i] == '-')
+			{
+				q.push("0");
+			}
+			
+			q.push(m_strInput);
+			m_strInput.clear();
 		}
 	}
 
-	delete[]m_strInput;
-	m_strInput = NULL;
 }
+

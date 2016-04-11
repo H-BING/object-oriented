@@ -1,26 +1,74 @@
+
+/********************************************************************************
+FileName    :           Calculator.cpp
+
+Author      :           HBING
+Version     :           1.1
+Date        :           2016/02/21
+
+Description:
+         计算带括号的四则运算表达式：
+             1、直接输出最终数值
+             2、输入-a时写出完整表达式
+
+Function List:
+         int main()      主体代码
+
+History:
+
+<author>    <time>     <version >            <desc>
+ HBING    2016/02/21      1.0        实现四则运算表达式的拆卸
+ HBING    2016/04/10      1.1        实现四则运算表达式的计算
+
+ ********************************************************************************/
+
 #include <iostream>
 #include <string>
 #include <queue>
 #include "Scan.h"
 #include "Print.h"
+#include "Calculation.h"
 using namespace std;
-/***********************************************************************/
-/***C++计算器项目的初始部分
- *  
- *  要求：
- *    <1>当输入的数字超过10位（包括小数位）时，报错。
- *    <2>能够处理不超过10位的任意实数
- *
- ***/
-/***********************************************************************/
 
-int main() {
-	cout << "请输入四则运算表达式：" << endl;
-	string input;
-	cin >> input;
+
+int main(int argc, char* argv[])
+{
 	
-	Scan _scan;
-	Print _print;
-	_scan.ToStringQueue(input);
-	_print.ToPrintQueue(_scan.q);
+	string input;
+	int temp = 0;
+	
+	int i;
+	for (i = 1; i < argc; i++) {
+		
+		input = argv[i];
+
+		Scan scan;
+		Print print;
+		Calculation calculate;
+
+		if(input=="-a")
+		{
+			temp = 1;
+			continue;
+		}
+
+		if (temp == 1) {
+			cout << input << "= ";
+		}
+
+		//拆分表达式
+		scan.ToStringQueue(input);
+
+		/*
+		//调用并输出拆分好的队列
+		print.ToPrintQueue(scan.q);
+		*/
+
+		//计算表达式的值
+		calculate.ToCalculate(scan.q);
+
+		input.clear();
+	}
+	
+	return 0;
 }

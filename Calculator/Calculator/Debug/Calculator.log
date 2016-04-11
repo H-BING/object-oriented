@@ -1,22 +1,3 @@
-﻿生成启动时间为 2016/2/21 23:04:04。
-     1>项目“C:\Users\HBING\Documents\Visual Studio 2015\Projects\Calculator\Calculator\Calculator.vcxproj”在节点 2 上(Build 个目标)。
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Calculator.cpp Print.cpp Scan.cpp
-         Scan.cpp
-     1>c:\users\hbing\documents\visual studio 2015\projects\calculator\calculator\scan.cpp(20): warning C4018: “<=”: 有符号/无符号不匹配
-     1>c:\users\hbing\documents\visual studio 2015\projects\calculator\calculator\scan.cpp(26): warning C4018: “<=”: 有符号/无符号不匹配
-         Print.cpp
-         正在生成代码...
-         正在编译...
-         Calculator.cpp
-         正在生成代码...
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\HBING\Documents\Visual Studio 2015\Projects\Calculator\Debug\Calculator.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\HBING\Documents\Visual Studio 2015\Projects\Calculator\Debug\Calculator.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\HBING\Documents\Visual Studio 2015\Projects\Calculator\Debug\Calculator.lib" /MACHINE:X86 Debug\Calculator.obj
-         Debug\Print.obj
-         Debug\Scan.obj
-         Calculator.vcxproj -> C:\Users\HBING\Documents\Visual Studio 2015\Projects\Calculator\Debug\Calculator.exe
-     1>已完成生成项目“C:\Users\HBING\Documents\Visual Studio 2015\Projects\Calculator\Calculator\Calculator.vcxproj”(Build 个目标)的操作。
-
-已成功生成。
-
-已用时间 00:00:04.20
+﻿  Calculator.cpp
+c:\users\dell\documents\object-oriented\calculator\calculator\calculator.cpp(30): warning C4101: 'print': unreferenced local variable
+  Calculator.vcxproj -> C:\Users\Dell\Documents\object-oriented\Calculator\Debug\Calculator.exe

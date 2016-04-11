@@ -4,10 +4,14 @@
 #include <queue>
 using namespace std;
 
-class Print {
+class Print 
+{
 
 public:
+
+	//Êä³ö¶ÓÁÐ
 	void ToPrintQueue(queue<string>q);
+
 private:
-	string str;
+	
 };
