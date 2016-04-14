@@ -7,7 +7,7 @@ Version     :           1.1
 Date        :           2016/04/10
 
 Description:
-         定义Scan类中的类方发
+         定义Scan类中的类方法
 
 Function List:
          void ToStringQueue        拆分四则运算表达式
