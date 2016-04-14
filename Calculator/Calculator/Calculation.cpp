@@ -18,6 +18,7 @@ History:
 
 <author>    <time>     <version >            <desc>
  HBING    2016/04/10      1.0        实现四则运算表达式的计算
+ HBING    2016/04/10      1.01       改进括号处理
 
  ********************************************************************************/
 
@@ -27,22 +28,27 @@ History:
 #include <string>
 #include <stack>
 #include "Calculation.h"
+#include <stdio.h>
 using namespace std;
 
 void Calculation::ToCalculate(queue<string>q)
 {
+	//判断符号优先级
 	int operate_priority(char c);
+
+	// + - * / 计算
 	double calculate(char oper, double front, double behind);
 
-	double _figure;
+	double _figure;//暂存中间计算结果
+	string m_strQue;//暂存队列元素
 	stringstream stream;
-	string m_strQue;
 
 	//数字符号分别入stack
 	while (!q.empty()) 
 	{
 		m_strQue = q.front();
 
+		//符号
 		if (m_strQue[0] < '0' || m_strQue[0] > '9')
 		{
 			stream << m_strQue;
@@ -51,6 +57,8 @@ void Calculation::ToCalculate(queue<string>q)
 			operate.push(m_cTemp);
 			stream.clear();
 		}
+
+		//数字
 		else
 		{
 			stream << m_strQue;
@@ -84,7 +92,7 @@ void Calculation::ToCalculate(queue<string>q)
 				operate.pop();
 				figure.pop();
 
-				//operate为空
+				//operate可能为空
 				if (operate.empty())
 				{
 					break;
@@ -106,11 +114,21 @@ void Calculation::ToCalculate(queue<string>q)
 
 			else
 			{
-				operate_temp.push(operate.top());
-				figure_temp.push(figure.top());
+				//遇到左括号
+				if (operate.top() == ')')
+				{
+					operate_temp.push(operate.top());
+					operate.pop();
+				}
+				//非左括号
+				else 
+				{
+					operate_temp.push(operate.top());
+					figure_temp.push(figure.top());
 
-				operate.pop();
-				figure.pop();
+					operate.pop();
+					figure.pop();
+				}
 			}
 
 			//括号匹配
@@ -135,7 +153,9 @@ void Calculation::ToCalculate(queue<string>q)
 		figure.push(_figure);
 	}
 	
-	cout << figure.top() << endl;
+	//输出最终计算结果
+	printf("%.3f\n",figure.top());
+	
 }
 
 //判断符号优先级

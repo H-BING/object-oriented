@@ -9,7 +9,7 @@ Date        :           2016/02/21
 Description:
          计算带括号的四则运算表达式：
              1、直接输出最终数值
-             2、输入-a时写出完整表达式
+             2、输入"-a"时写出完整表达式
 
 Function List:
          int main()      主体代码
@@ -33,17 +33,27 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-	
+	cout << "-----------------------------------------------------" << endl;
+	cout << endl;
+	cout << "    注意事项：" << endl;
+	cout << "        1、请输入合法四则运算表达式" << endl;
+	cout << "        2、输入的数字位数不超过10位（包括小数位）" << endl;
+	cout << "        3、计算结果最终保留三位小数" << endl;
+	cout << endl;
+	cout << "-----------------------------------------------------" << endl;
+	cout << endl << "请输入四则运算表达式：" << endl;
 	string input;
-	int temp = 0;
+	int temp = 0;//标记是否输入"-a"
+	
 	
 	int i;
-	for (i = 1; i < argc; i++) {
+	for (i = 1; i < argc; i++) 
+	{
 		
 		input = argv[i];
 
 		Scan scan;
-		Print print;
+		//Print print;
 		Calculation calculate;
 
 		if(input=="-a")
@@ -52,7 +62,8 @@ int main(int argc, char* argv[])
 			continue;
 		}
 
-		if (temp == 1) {
+		if (temp == 1) 
+		{
 			cout << input << "= ";
 		}
 
