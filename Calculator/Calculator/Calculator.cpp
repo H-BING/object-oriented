@@ -38,10 +38,10 @@ int main(int argc, char* argv[])
 	cout << "    注意事项：" << endl;
 	cout << "        1、请输入合法四则运算表达式" << endl;
 	cout << "        2、输入的数字位数不超过10位（包括小数位）" << endl;
-	cout << "        3、计算结果最终保留三位小数" << endl;
+	cout << "        3、计算结果保留小数点后三位" << endl;
 	cout << endl;
 	cout << "-----------------------------------------------------" << endl;
-	cout << endl << "请输入四则运算表达式：" << endl;
+	cout << endl << "请输入四则运算表达式：" << endl << endl;
 
 	string input;
 	int temp = 0;//标记是否输入"-a"
@@ -49,7 +49,6 @@ int main(int argc, char* argv[])
 	int i;
 	for (i = 1; i < argc; i++) 
 	{
-		
 		input = argv[i];
 
 		Scan scan;
@@ -65,6 +64,10 @@ int main(int argc, char* argv[])
 		if (temp == 1) 
 		{
 			cout << input << "= ";
+		}
+		else 
+		{
+			cout << "计算结果为：";
 		}
 
 		//拆分表达式

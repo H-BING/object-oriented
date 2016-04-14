@@ -3,7 +3,7 @@
 FileName    :           Calculatoion.cpp
 
 Author      :           HBING
-Version     :           1.0
+Version     :           1.02
 Date        :           2016/04/10
 
 Description:
@@ -18,7 +18,8 @@ History:
 
 <author>    <time>     <version >            <desc>
  HBING    2016/04/10      1.0        实现四则运算表达式的计算
- HBING    2016/04/10      1.01       改进括号处理
+ HBING    2016/04/13      1.01       改进括号处理
+ HBING    2016/04/14      1.02       补充判断除数为0的情况
 
  ********************************************************************************/
 
