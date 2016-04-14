@@ -42,9 +42,9 @@ int main(int argc, char* argv[])
 	cout << endl;
 	cout << "-----------------------------------------------------" << endl;
 	cout << endl << "请输入四则运算表达式：" << endl;
+
 	string input;
 	int temp = 0;//标记是否输入"-a"
-	
 	
 	int i;
 	for (i = 1; i < argc; i++) 

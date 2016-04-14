@@ -103,6 +103,13 @@ void Calculation::ToCalculate(queue<string>q)
 			//运算符优先级比较计算 
 			if ((operate_priority(operate.top()) < operate_priority(operate_temp.top())) && (operate_temp.top() != ')'))
 			{
+				//除数为0
+				if (operate_temp.top() == '/'&&figure_temp.top() == 0) 
+				{
+					cout << "您输入的四则运算表达式出现除数为0的情况。请重新检查表达式的正确性！" << endl;
+					exit(0);
+				}
+
 				_figure = calculate(operate_temp.top(), figure.top(), figure_temp.top());
 
 				operate_temp.pop();
@@ -144,6 +151,13 @@ void Calculation::ToCalculate(queue<string>q)
 	
 	while (!operate_temp.empty()) 
 	{
+		//除数为0
+		if (operate_temp.top() == '/'&&figure_temp.top() == 0)
+		{
+			cout << "您输入的四则运算表达式出现除数为0的情况。请重新检查表达式的正确性！" << endl;
+			exit(0);
+		}
+
 		_figure = calculate(operate_temp.top(), figure.top(), figure_temp.top());
 
 		operate_temp.pop();
