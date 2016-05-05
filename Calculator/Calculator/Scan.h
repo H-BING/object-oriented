@@ -10,7 +10,7 @@ class Scan
 public:
 
 	//拆分表达式并传入队列
-	void ToStringQueue(string input);
+	void ToStringQueue(string m_sInput);
 
 	queue<string>q;
 

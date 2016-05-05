@@ -3,7 +3,7 @@
 FileName    :           Calculatoion.cpp
 
 Author      :           HBING
-Version     :           1.02
+Version     :           1.021
 Date        :           2016/04/10
 
 Description:
@@ -20,6 +20,8 @@ History:
  HBING    2016/04/10      1.0        实现四则运算表达式的计算
  HBING    2016/04/13      1.01       改进括号处理
  HBING    2016/04/14      1.02       补充判断除数为0的情况
+ HBING    2016/04/30      1.021      1.修改函数声明位置
+                                     2.清空stringstream对象的缓存
 
  ********************************************************************************/
 
@@ -34,57 +36,54 @@ using namespace std;
 
 void Calculation::ToCalculate(queue<string>q)
 {
-	//判断符号优先级
-	int operate_priority(char c);
 
-	// + - * / 计算
-	double calculate(char oper, double front, double behind);
-
-	double _figure;//暂存中间计算结果
-	string m_strQue;//暂存队列元素
+	double dTempFigure;//暂存中间计算结果
+	string sTempQueue;//暂存队列元素
 	stringstream stream;
 
 	//数字符号分别入stack
-	while (!q.empty()) 
+	while (!q.empty())
 	{
-		m_strQue = q.front();
+		sTempQueue = q.front();
 
 		//符号
-		if (m_strQue[0] < '0' || m_strQue[0] > '9')
+		if (sTempQueue[0] < '0' || sTempQueue[0] > '9')
 		{
-			stream << m_strQue;
+			stream << sTempQueue;
 			stream >> m_cTemp;
 
 			operate.push(m_cTemp);
 			stream.clear();
+			stream.str("");
 		}
 
 		//数字
 		else
 		{
-			stream << m_strQue;
+			stream << sTempQueue;
 			stream >> m_dTemp;
 
 			figure.push(m_dTemp);
 			stream.clear();
+			stream.str("");
 		}
 
 		q.pop();
 	}
 	
-	while (!operate.empty()) 
+	while (!operate.empty())
 	{
-		
+
 		//遇到左括号
-		if (operate.top() == ')') 
+		if (operate.top() == ')')
 		{
 			operate_temp.push(operate.top());
 			operate.pop();
 		}
-		
+
 		else
 		{
-		
+
 			if (operate_temp.empty())
 			{
 				operate_temp.push(operate.top());
@@ -105,19 +104,19 @@ void Calculation::ToCalculate(queue<string>q)
 			if ((operate_priority(operate.top()) < operate_priority(operate_temp.top())) && (operate_temp.top() != ')'))
 			{
 				//除数为0
-				if (operate_temp.top() == '/'&&figure_temp.top() == 0) 
+				if (operate_temp.top() == '/'&&figure_temp.top() == 0)
 				{
 					cout << "您输入的四则运算表达式出现除数为0的情况。请重新检查表达式的正确性！" << endl;
 					exit(0);
 				}
 
-				_figure = calculate(operate_temp.top(), figure.top(), figure_temp.top());
+				dTempFigure = calculate(operate_temp.top(), figure.top(), figure_temp.top());
 
 				operate_temp.pop();
 				figure.pop();
 				figure_temp.pop();
 
-				figure.push(_figure);
+				figure.push(dTempFigure);
 			}
 
 			else
@@ -129,7 +128,7 @@ void Calculation::ToCalculate(queue<string>q)
 					operate.pop();
 				}
 				//非左括号
-				else 
+				else
 				{
 					operate_temp.push(operate.top());
 					figure_temp.push(figure.top());
@@ -150,7 +149,7 @@ void Calculation::ToCalculate(queue<string>q)
 
 	}
 	
-	while (!operate_temp.empty()) 
+	while (!operate_temp.empty())
 	{
 		//除数为0
 		if (operate_temp.top() == '/'&&figure_temp.top() == 0)
@@ -159,62 +158,62 @@ void Calculation::ToCalculate(queue<string>q)
 			exit(0);
 		}
 
-		_figure = calculate(operate_temp.top(), figure.top(), figure_temp.top());
+		dTempFigure = calculate(operate_temp.top(), figure.top(), figure_temp.top());
 
 		operate_temp.pop();
 		figure.pop();
 		figure_temp.pop();
 
-		figure.push(_figure);
+		figure.push(dTempFigure);
 	}
 	
 	//输出最终计算结果
-	printf("%.3f\n",figure.top());
-	
+	printf("%.3f\n", figure.top());
+
 }
 
 //判断符号优先级
-int operate_priority(char c)
+int Calculation::operate_priority(char c)
 {
-	int pri;
-	switch (c) 
+	int nPri;
+	switch (c)
 	{
 	case '+':
 	case '-':
-		pri = 0;
+		nPri = 0;
 		break;
 	case '*':
 	case '/':
-		pri = 1;
+		nPri = 1;
 		break;
 	case '(':
-		pri = -1;
+		nPri = -1;
 		break;
 	case ')':
-		pri = 2;
+		nPri = 2;
 		break;
 	}
-	return pri;
+	return nPri;
 }
 
 //计算
-double calculate(char oper, double front, double behind) 
+double Calculation::calculate(char dOper, double dFront, double dBehind)
 {
-	double result;
-	switch(oper)
+	double dResult;
+	switch (dOper)
 	{
 	case '+':
-		result = front + behind;
+		dResult = dFront + dBehind;
 		break;
 	case '-':
-		result = front - behind;
+		dResult = dFront - dBehind;
 		break;
 	case '*':
-		result = front * behind;
+		dResult = dFront * dBehind;
 		break;
 	case '/':
-		result = front / behind;
+		dResult = dFront / dBehind;
 		break;
 	}
-	return result;
+	return dResult;
 }

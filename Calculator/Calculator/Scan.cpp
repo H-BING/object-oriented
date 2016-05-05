@@ -16,8 +16,8 @@ History:
 
 <author>    <time>     <version>            <desc>
  HBING    2016/02/21      1.0          拆分四则运算表达式
- HBING    2016/04/10      1.10         实现-号前补0以保证算式合法性
-                                       补充对符号的判断：即 + - * / ( ) 才可入队列
+ HBING    2016/04/10      1.10         1.实现-号前补0以保证算式合法性
+                                       2.补充对符号的判断：即 + - * / ( ) 才可入队列
  HBING    2016/04/13      1.11         对数字位数超过10位进行报错
 
 ********************************************************************************/
@@ -27,29 +27,29 @@ History:
 #include "Scan.h"
 using namespace std;
 
-void Scan::ToStringQueue(string input) 
+void Scan::ToStringQueue(string m_sInput) 
 {
 
-	string m_strInput;
+	string sInput;
 	int nInputLength;
 	
-	for (int i = 0; i <= input.size(); i++) 
+	for (int i = 0; i <= m_sInput.size(); i++) 
 	{
 
-		if (m_strInput.empty()) 
+		if (sInput.empty()) 
 		{
-			m_strInput = input[i];
+			sInput = m_sInput[i];
 			nInputLength = 1;
 		}
 
 		//数字
-		if (input[i] <= '9'&&input[i] >= '0' || input[i] == '.') 
+		if (m_sInput[i] <= '9'&&m_sInput[i] >= '0' || m_sInput[i] == '.') 
 		{
 
 			//两位及以上数字
-			if ((input[i + 1] <= '9'&&input[i + 1] >= '0') || input[i + 1] == '.') 
+			if ((m_sInput[i + 1] <= '9'&&m_sInput[i + 1] >= '0') || m_sInput[i + 1] == '.') 
 			{
-				m_strInput += input[i + 1];
+				sInput += m_sInput[i + 1];
 				nInputLength++;
 			}
 
@@ -63,23 +63,23 @@ void Scan::ToStringQueue(string input)
 					exit(0);
 				}
 
-				q.push(m_strInput);
-				m_strInput.clear();
+				q.push(sInput);
+				sInput.clear();
 			}
 
 		}
 
 		//符号
-		else if (input[i] == '+' || input[i] == '-' || input[i] == '*' || input[i] == '/' || input[i] == '(' || input[i] == ')')
+		else if (m_sInput[i] == '+' || m_sInput[i] == '-' || m_sInput[i] == '*' || m_sInput[i] == '/' || m_sInput[i] == '(' || m_sInput[i] == ')')
 		{
 			//非法运算'-'前补0
-			if ((q.empty() || q.back() == "(") && input[i] == '-')
+			if ((q.empty() || q.back() == "(") && m_sInput[i] == '-')
 			{
 				q.push("0");
 			}
 			
-			q.push(m_strInput);
-			m_strInput.clear();
+			q.push(sInput);
+			sInput.clear();
 		}
 	}
 

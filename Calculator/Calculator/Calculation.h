@@ -5,15 +5,13 @@
 #include <queue>
 using namespace std;
 
-class Calculation 
+class Calculation
 {
 
 public:
 
 	//计算表达式的值
 	void ToCalculate(queue<string>q);
-
-
 
 private:
 
@@ -27,5 +25,11 @@ private:
 	//存储符号
 	stack<char>operate;
 	stack<char>operate_temp;
+
+	//判断符号优先级
+	int operate_priority(char c);
+
+	// + - * / 计算
+	double calculate(char dOper, double dFront, double dBehind);
 
 };

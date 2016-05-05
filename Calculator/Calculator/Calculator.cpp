@@ -43,27 +43,29 @@ int main(int argc, char* argv[])
 	cout << "-----------------------------------------------------" << endl;
 	cout << endl << "请输入四则运算表达式：" << endl << endl;
 
-	string input;
-	int temp = 0;//标记是否输入"-a"
+	string sInput;
+	int nTemp = 0;//标记是否输入"-a"
 	
 	int i;
 	for (i = 1; i < argc; i++) 
 	{
-		input = argv[i];
+
+		sInput = argv[i];
 
 		Scan scan;
 		//Print print;
 		Calculation calculate;
 
-		if(input=="-a")
+		if(sInput=="-a")
 		{
-			temp = 1;
+			nTemp = 1;
 			continue;
 		}
 
-		if (temp == 1) 
+		//判断是否有输入-a
+		if (nTemp == 1) 
 		{
-			cout << input << "= ";
+			cout << sInput << "= ";
 		}
 		else 
 		{
@@ -71,7 +73,7 @@ int main(int argc, char* argv[])
 		}
 
 		//拆分表达式
-		scan.ToStringQueue(input);
+		scan.ToStringQueue(sInput);
 
 		/*
 		//调用并输出拆分好的队列
@@ -81,8 +83,9 @@ int main(int argc, char* argv[])
 		//计算表达式的值
 		calculate.ToCalculate(scan.q);
 
-		input.clear();
+		sInput.clear();
 	}
 	
+
 	return 0;
 }

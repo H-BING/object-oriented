@@ -29,21 +29,21 @@ using namespace std;
 void Print::ToPrintQueue(queue<string>q) 
 {
 
-	string m_str;//暂时存储字符串
+	string m_sStr;//暂时存储字符串
 
 	while (!q.empty()) 
 	{
+		m_sStr = q.front();
 
-		m_str = q.front();
 		//判断数字长度
-		if (m_str.size() > 10) 
+		if (m_sStr.size() > 10) 
 		{
 			cout << "您输入的数字位数超过10位（包括小数位）" << endl;
 			break;
 		}
 		cout << q.front() << endl;
-		q.pop();
 
+		q.pop();
 	}
 
 }
