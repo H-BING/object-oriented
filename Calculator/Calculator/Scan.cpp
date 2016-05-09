@@ -29,13 +29,11 @@ using namespace std;
 
 void Scan::ToStringQueue(string m_sInput) 
 {
-
 	string sInput;
 	int nInputLength;
 	
 	for (int i = 0; i <= m_sInput.size(); i++) 
 	{
-
 		if (sInput.empty()) 
 		{
 			sInput = m_sInput[i];
@@ -82,6 +80,5 @@ void Scan::ToStringQueue(string m_sInput)
 			sInput.clear();
 		}
 	}
-
 }
 

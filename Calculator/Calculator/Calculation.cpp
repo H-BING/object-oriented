@@ -10,9 +10,9 @@ Description:
          定义Calculation类中的类方法
 
 Function List:
-         void ToCalculate          实现带括号的四则运算表达式的计算
-         int operate_priority      判断符号优先级
-         double calculate          + - * / 简单计算
+         double ToCalculate          实现带括号的四则运算表达式的计算
+         int operate_priority        判断符号优先级
+         double calculate            + - * / 简单计算
 
 History:
 
@@ -31,12 +31,10 @@ History:
 #include <string>
 #include <stack>
 #include "Calculation.h"
-#include <stdio.h>
 using namespace std;
 
-void Calculation::ToCalculate(queue<string>q)
+double Calculation::ToCalculate(queue<string>q)
 {
-
 	double dTempFigure;//暂存中间计算结果
 	string sTempQueue;//暂存队列元素
 	stringstream stream;
@@ -167,9 +165,10 @@ void Calculation::ToCalculate(queue<string>q)
 		figure.push(dTempFigure);
 	}
 	
-	//输出最终计算结果
-	printf("%.3f\n", figure.top());
+	m_dResult = figure.top();
+	figure.pop();
 
+	return m_dResult;
 }
 
 //判断符号优先级

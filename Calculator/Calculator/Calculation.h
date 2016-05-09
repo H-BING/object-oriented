@@ -11,7 +11,10 @@ class Calculation
 public:
 
 	//计算表达式的值
-	void ToCalculate(queue<string>q);
+	double ToCalculate(queue<string>q);
+
+	//存储计算结果
+	double m_dResult;
 
 private:
 
