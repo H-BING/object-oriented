@@ -167,7 +167,7 @@ double Calculation::ToCalculate(queue<string>q)
 	
 	m_dResult = figure.top();
 	figure.pop();
-
+	
 	return m_dResult;
 }
 

@@ -56,25 +56,27 @@ void Print::ToPrintIsNot_f(string sInput, bool bIs_a)
 //以文件方式输出结果
 void Print::ToPrintIs_f(string sText_txt, string sResult_txt) 
 {
-	Scan scan;
-	Calculation calculate;
-	string sExperssion;
-
+	
 	ifstream in;
 	ofstream out;
 
 	//打开文件
 	in.open(sText_txt.c_str(), ios::in);
 	out.open(sResult_txt.c_str(), ios::out);
-
+	
 	while (!in.eof())
 	{
+		Scan scan;
+		Calculation calculate;
+		string sExperssion;
+		
 		//从sText_txt路径获取数据
 		getline(in, sExperssion, '\n');
 
 		//拆分表达式
 		scan.ToStringQueue(sExperssion);
 
+		
 		//计算表达式的值
 		calculate.ToCalculate(scan.q);
 
